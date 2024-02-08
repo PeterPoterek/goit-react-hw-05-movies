@@ -11,7 +11,6 @@ const Home = () => {
       <ul>
         {trendingList.map((element, index) => {
           if (!element.title) return;
-          console.log(element);
           return (
             <li key={`${element.id}${index}`}>
               <Link to={`/movies/${element.id}`}>{element.title}</Link>
