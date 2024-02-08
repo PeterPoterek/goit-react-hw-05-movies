@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState, useContext } from 'react';
+import { lazy, Suspense, useEffect, useState, createContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 
@@ -11,6 +11,8 @@ const Movies = lazy(() => import('./Movies/Movies.jsx'));
 const MovieDetails = lazy(() => import('./MovieDetails/MovieDetails.jsx'));
 const Cast = lazy(() => import('./Cast/Cast.jsx'));
 const Reviews = lazy(() => import('./Reviews/Reviews.jsx'));
+
+export const TrendingListContext = createContext();
 
 export const App = () => {
   const [trendingList, setTrendingList] = useState([]);
@@ -29,8 +31,6 @@ export const App = () => {
           }
         );
 
-        console.log(response.data.results);
-
         setTrendingList(prevTrendingList => [
           ...prevTrendingList,
           ...response.data.results,
@@ -45,17 +45,19 @@ export const App = () => {
 
   return (
     <>
-      <Navbar />
-      <Suspense fallback={<LoadingSpinner />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/movies/:movieId" element={<MovieDetails />} />
-          <Route path="/movies/:movieId/cast" element={<Cast />} />
-          <Route path="/movies/:movieId/reviews" element={<Reviews />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
+      <TrendingListContext.Provider value={{ trendingList, setTrendingList }}>
+        <Navbar />
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/movies/:movieId" element={<MovieDetails />} />
+            <Route path="/movies/:movieId/cast" element={<Cast />} />
+            <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </TrendingListContext.Provider>
     </>
   );
 };
