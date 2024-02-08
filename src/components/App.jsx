@@ -1,5 +1,6 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useState, useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import axios from 'axios';
 
 import Navbar from './Navbar/Navbar.jsx';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner.jsx';
@@ -12,6 +13,36 @@ const Cast = lazy(() => import('./Cast/Cast.jsx'));
 const Reviews = lazy(() => import('./Reviews/Reviews.jsx'));
 
 export const App = () => {
+  const [trendingList, setTrendingList] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          'https://api.themoviedb.org/3/trending/all/day?language=en-US',
+          {
+            headers: {
+              accept: 'application/json',
+              Authorization:
+                'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzZWM4YjU4MjhiNGVjNGMwZjU5YzFkZTVlMmQ1ZTNiOCIsInN1YiI6IjY1YzNhMDVlMmZlMmZhMDE4NDJhODNlOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.V9SAFWmxQkdTT5KUPdr_PSuh1d-FJ7WmxFeruZ9_Y5Q',
+            },
+          }
+        );
+
+        console.log(response.data.results);
+
+        setTrendingList(prevTrendingList => [
+          ...prevTrendingList,
+          ...response.data.results,
+        ]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <Navbar />
