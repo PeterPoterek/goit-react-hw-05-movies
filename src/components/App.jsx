@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import axios from 'axios';
 
 import Home from './Home/Home.jsx';
 import Navbar from './Navbar/Navbar.jsx';
