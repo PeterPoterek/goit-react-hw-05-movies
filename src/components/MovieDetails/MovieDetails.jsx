@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner.jsx';
 
@@ -34,16 +35,41 @@ const MovieDetails = () => {
     return <LoadingSpinner />;
   }
 
+  const calculateUserScorePercentage = movie => {
+    const userScore = movie.vote_average;
+    const maximumScore = 10;
+    const userScorePercentage = (userScore / maximumScore) * 100;
+    return Math.round(userScorePercentage);
+  };
+
   console.log(movieDetails);
 
   return (
     <>
-      <div>{movieId}</div>
-      <div>{movieDetails.title}</div>
+      <h2>{movieDetails.title}</h2>
+      <img
+        src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
+        alt={`Poster for ${movieDetails.title}`}
+      />
       <ul>
         {movieDetails.genres.map(genre => {
           return <li key={genre.id}>{genre.name}</li>;
         })}
+      </ul>
+
+      <div>
+        <h3>Overview</h3>
+        <p>{movieDetails.overview}</p>
+      </div>
+      <p>{calculateUserScorePercentage(movieDetails)}%</p>
+
+      <ul>
+        <li>
+          <Link>Cast</Link>
+        </li>
+        <li>
+          <Link>Reviews</Link>
+        </li>
       </ul>
     </>
   );
