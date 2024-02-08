@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner.jsx';
+import Cast from 'components/Cast/Cast.jsx';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -46,6 +47,8 @@ const MovieDetails = () => {
 
   return (
     <>
+      <Link to="/">Go back</Link>
+
       <h2>{movieDetails.title}</h2>
       <img
         src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
@@ -71,6 +74,8 @@ const MovieDetails = () => {
           <Link>Reviews</Link>
         </li>
       </ul>
+
+      <Cast />
     </>
   );
 };

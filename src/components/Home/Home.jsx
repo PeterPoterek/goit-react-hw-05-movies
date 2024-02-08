@@ -10,7 +10,7 @@ const Home = () => {
 
       <ul>
         {trendingList.map((element, index) => {
-          if (!element.title) return;
+          if (!element.title) return null;
           return (
             <li key={`${element.id}${index}`}>
               <Link to={`/movies/${element.id}`}>{element.title}</Link>
