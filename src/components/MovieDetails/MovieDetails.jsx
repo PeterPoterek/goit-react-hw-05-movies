@@ -45,6 +45,11 @@ const MovieDetails = () => {
     const userScorePercentage = (userScore / maximumScore) * 100;
     return Math.round(userScorePercentage);
   };
+  const handleTabClick = tab => {
+    setTab(tab);
+    const newUrl = `/goit-react-hw-05-movies/movies/${movieId}/${tab}`;
+    window.history.pushState({ path: newUrl }, '', newUrl);
+  };
 
   return (
     <>
@@ -67,10 +72,10 @@ const MovieDetails = () => {
 
       <ul>
         <li>
-          <button onClick={() => setTab('cast')}>Cast</button>
+          <button onClick={() => handleTabClick('cast')}>Cast</button>
         </li>
         <li>
-          <button onClick={() => setTab('reviews')}>Reviews</button>
+          <button onClick={() => handleTabClick('reviews')}>Reviews</button>
         </li>
       </ul>
 
