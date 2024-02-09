@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner.jsx';
@@ -47,15 +46,8 @@ const MovieDetails = () => {
     return Math.round(userScorePercentage);
   };
 
-  const handleLinkClick = (path, selected) => {
-    window.history.replaceState(null, null, path);
-    setTab(selected);
-  };
-
   return (
     <>
-      <Link to="/">Go back</Link>
-
       <h2>{movieDetails.title}</h2>
       <img
         src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
@@ -75,10 +67,10 @@ const MovieDetails = () => {
 
       <ul>
         <li>
-          <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+          <button onClick={() => setTab('cast')}>Cast</button>
         </li>
         <li>
-          <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+          <button onClick={() => setTab('reviews')}>Reviews</button>
         </li>
       </ul>
 
