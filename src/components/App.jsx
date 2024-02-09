@@ -13,9 +13,11 @@ const Cast = lazy(() => import('./Cast/Cast.jsx'));
 const Reviews = lazy(() => import('./Reviews/Reviews.jsx'));
 
 export const TrendingListContext = createContext();
+export const CurrentMovieContext = createContext();
 
 export const App = () => {
   const [trendingList, setTrendingList] = useState([]);
+  const [currentMovie, setCurrentMovie] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,17 +48,19 @@ export const App = () => {
   return (
     <>
       <TrendingListContext.Provider value={{ trendingList, setTrendingList }}>
-        <Navbar />
-        <Suspense fallback={<LoadingSpinner />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/movies" element={<Movies />} />
-            <Route path="/movies/:movieId" element={<MovieDetails />} />
-            <Route path="/movies/:movieId/cast" element={<Cast />} />
-            <Route path="/movies/:movieId/reviews" element={<Reviews />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+        <CurrentMovieContext.Provider value={{ currentMovie, setCurrentMovie }}>
+          <Navbar />
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/movies" element={<Movies />} />
+              <Route path="/movies/:movieId" element={<MovieDetails />} />
+              <Route path="/movies/:movieId/cast" element={<Cast />} />
+              <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </CurrentMovieContext.Provider>
       </TrendingListContext.Provider>
     </>
   );

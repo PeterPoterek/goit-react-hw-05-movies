@@ -1,9 +1,11 @@
 import { TrendingListContext } from 'components/App';
+import { CurrentMovieContext } from 'components/App';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
   const { trendingList } = useContext(TrendingListContext);
+  const { currentMovie, setCurrentMovie } = useContext(CurrentMovieContext);
   return (
     <div>
       <h1>Trending Today</h1>
@@ -13,7 +15,14 @@ const Home = () => {
           if (!element.title) return null;
           return (
             <li key={`${element.id}${index}`}>
-              <Link to={`/movies/${element.id}`}>{element.title}</Link>
+              <Link
+                onClick={() => {
+                  setCurrentMovie(element.id);
+                }}
+                to={`/movies/${element.id}`}
+              >
+                {element.title}
+              </Link>
             </li>
           );
         })}

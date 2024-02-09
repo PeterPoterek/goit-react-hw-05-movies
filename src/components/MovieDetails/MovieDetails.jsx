@@ -2,13 +2,16 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner.jsx';
 import Cast from 'components/Cast/Cast.jsx';
 import Reviews from 'components/Reviews/Reviews.jsx';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
+
   const [movieDetails, setMovieDetails] = useState(null);
+  const [selectedTab, setTab] = useState('');
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -44,11 +47,10 @@ const MovieDetails = () => {
     return Math.round(userScorePercentage);
   };
 
-  const handleLinkClick = path => {
+  const handleLinkClick = (path, selected) => {
     window.history.replaceState(null, null, path);
+    setTab(selected);
   };
-
-  console.log(movieDetails);
 
   return (
     <>
@@ -73,29 +75,15 @@ const MovieDetails = () => {
 
       <ul>
         <li>
-          <p
-            onClick={() =>
-              handleLinkClick(`/goit-react-hw-05-movies/movies/${movieId}/cast`)
-            }
-          >
-            Cast
-          </p>
+          <Link to={`/movies/${movieId}/cast`}>Cast</Link>
         </li>
         <li>
-          <p
-            onClick={() =>
-              handleLinkClick(
-                `/goit-react-hw-05-movies/movies/${movieId}/reviews`
-              )
-            }
-          >
-            Reviews
-          </p>
+          <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
         </li>
       </ul>
 
-      <Cast />
-      <Reviews />
+      {selectedTab === 'cast' && <Cast />}
+      {selectedTab === 'reviews' && <Reviews />}
     </>
   );
 };
