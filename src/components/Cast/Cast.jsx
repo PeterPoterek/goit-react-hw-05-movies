@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 const Cast = () => {
   const { movieId } = useParams();
 
-  const [currentMovie, setCurrentMovie] = useState(movieId);
+  const [currentMovie] = useState(movieId);
   const [castList, setCastList] = useState([]);
 
   useEffect(() => {

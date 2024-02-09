@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   const { trendingList } = useContext(TrendingListContext);
-  const { currentMovie, setCurrentMovie } = useContext(CurrentMovieContext);
+  const { setCurrentMovie } = useContext(CurrentMovieContext);
   return (
     <div>
       <h1>Trending Today</h1>
