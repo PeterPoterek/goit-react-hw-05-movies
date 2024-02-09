@@ -44,6 +44,10 @@ const MovieDetails = () => {
     return Math.round(userScorePercentage);
   };
 
+  const handleLinkClick = path => {
+    window.history.replaceState(null, null, path);
+  };
+
   console.log(movieDetails);
 
   return (
@@ -69,10 +73,24 @@ const MovieDetails = () => {
 
       <ul>
         <li>
-          <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+          <p
+            onClick={() =>
+              handleLinkClick(`/goit-react-hw-05-movies/movies/${movieId}/cast`)
+            }
+          >
+            Cast
+          </p>
         </li>
         <li>
-          <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+          <p
+            onClick={() =>
+              handleLinkClick(
+                `/goit-react-hw-05-movies/movies/${movieId}/reviews`
+              )
+            }
+          >
+            Reviews
+          </p>
         </li>
       </ul>
 
