@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner.jsx';
 import Cast from 'components/Cast/Cast.jsx';
+import Reviews from 'components/Reviews/Reviews.jsx';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -68,14 +69,15 @@ const MovieDetails = () => {
 
       <ul>
         <li>
-          <Link>Cast</Link>
+          <Link to={`/movies/${movieId}/cast`}>Cast</Link>
         </li>
         <li>
-          <Link>Reviews</Link>
+          <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
         </li>
       </ul>
 
       <Cast />
+      <Reviews />
     </>
   );
 };
