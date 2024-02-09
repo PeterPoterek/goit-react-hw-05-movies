@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import axios from 'axios';
-
+import { useNavigate, Link } from 'react-router-dom';
 const Movies = () => {
   const [newMovieSearch, setNewMovieSearch] = useState('');
   const [movies, setMovies] = useState([]);
+  const navigate = useNavigate();
 
   const handleMovieSearch = async () => {
     try {
@@ -26,6 +26,8 @@ const Movies = () => {
       );
 
       setMovies(response.data.results);
+
+      navigate(`/movies?query=${newMovieSearch}`);
     } catch (error) {
       console.error(error);
     }
