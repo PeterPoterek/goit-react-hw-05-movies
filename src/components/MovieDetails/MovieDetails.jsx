@@ -70,7 +70,7 @@ const MovieDetails = () => {
   };
 
   const handleBackButtonClick = () => {
-    navigate(`/movies/${movieId}/`);
+    navigate(-1);
     setSelectedTab('');
   };
 

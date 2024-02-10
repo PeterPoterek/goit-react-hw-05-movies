@@ -11,7 +11,6 @@ import {
 
 const Home = () => {
   const { trendingList } = useContext(TrendingListContext);
-  const { setCurrentMovie } = useContext(CurrentMovieContext);
 
   return (
     <HomeContainer>
@@ -22,12 +21,7 @@ const Home = () => {
           if (!element.title) return null;
           return (
             <MovieItem key={`${element.id}${index}`}>
-              <MovieLink
-                onClick={() => {
-                  setCurrentMovie(element.id);
-                }}
-                to={`/movies/${element.id}`}
-              >
+              <MovieLink to={`/movies/${element.id}`}>
                 {element.title}
               </MovieLink>
             </MovieItem>
