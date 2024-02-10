@@ -2,6 +2,12 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const NavbarContainer = styled.div`
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  width: 100%;
+
   background-color: #18181b;
   padding: 10px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
