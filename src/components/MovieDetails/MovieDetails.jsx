@@ -6,6 +6,20 @@ import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner.jsx';
 import Cast from 'components/Cast/Cast.jsx';
 import Reviews from 'components/Reviews/Reviews.jsx';
 
+import {
+  MovieDetailsContainer,
+  MovieTitle,
+  MoviePoster,
+  GenreList,
+  GenreItem,
+  OverviewContainer,
+  OverviewTitle,
+  UserScore,
+  TabList,
+  TabItem,
+  TabButton,
+} from './MovieDetailsStyles';
+
 const MovieDetails = () => {
   const { movieId } = useParams();
 
@@ -52,36 +66,40 @@ const MovieDetails = () => {
   };
 
   return (
-    <>
-      <h2>{movieDetails.title}</h2>
-      <img
+    <MovieDetailsContainer>
+      <MovieTitle>{movieDetails.title}</MovieTitle>
+      <MoviePoster
         src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
         alt={`Poster for ${movieDetails.title}`}
       />
-      <ul>
-        {movieDetails.genres.map(genre => {
-          return <li key={genre.id}>{genre.name}</li>;
-        })}
-      </ul>
+      <GenreList>
+        {movieDetails.genres.map(genre => (
+          <GenreItem key={genre.id}>{genre.name}</GenreItem>
+        ))}
+      </GenreList>
 
-      <div>
-        <h3>Overview</h3>
+      <OverviewContainer>
+        <OverviewTitle>Overview</OverviewTitle>
         <p>{movieDetails.overview}</p>
-      </div>
-      <p>{calculateUserScorePercentage(movieDetails)}%</p>
+      </OverviewContainer>
+      <UserScore>
+        User Score: {calculateUserScorePercentage(movieDetails)}%
+      </UserScore>
 
-      <ul>
-        <li>
-          <button onClick={() => handleTabClick('cast')}>Cast</button>
-        </li>
-        <li>
-          <button onClick={() => handleTabClick('reviews')}>Reviews</button>
-        </li>
-      </ul>
+      <TabList>
+        <TabItem>
+          <TabButton onClick={() => handleTabClick('cast')}>Cast</TabButton>
+        </TabItem>
+        <TabItem>
+          <TabButton onClick={() => handleTabClick('reviews')}>
+            Reviews
+          </TabButton>
+        </TabItem>
+      </TabList>
 
       {selectedTab === 'cast' && <Cast />}
       {selectedTab === 'reviews' && <Reviews />}
-    </>
+    </MovieDetailsContainer>
   );
 };
 
