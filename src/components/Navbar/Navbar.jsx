@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
-
+import { NavbarContainer, NavList, NavItem, NavLink } from './NavbarStyles';
 const Navbar = () => {
   return (
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/movies">Movies</Link>
-        </li>
-      </ul>
-    </div>
+    <NavbarContainer>
+      <NavList>
+        <NavItem>
+          <NavLink to="/">Home</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/movies">Movies</NavLink>
+        </NavItem>
+      </NavList>
+    </NavbarContainer>
   );
 };
 
