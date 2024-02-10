@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const NavbarContainer = styled.div`
   background-color: #18181b;
@@ -11,15 +11,23 @@ export const NavList = styled.ul`
   list-style: none;
   padding: 0;
   display: flex;
+  gap: 2rem;
+  padding-left: 2rem;
 `;
 
-export const NavItem = styled.li`
+export const NavbarItem = styled.li`
   margin-right: 20px;
 `;
 
-export const NavLink = styled(Link)`
+export const NavbarLink = styled(NavLink)`
   text-decoration: none;
   color: white;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 2.5rem;
+
+  transition: color 0.3s ease;
+
+  &.active {
+    color: #e9d5ff;
+  }
 `;

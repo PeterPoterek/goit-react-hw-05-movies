@@ -1,15 +1,22 @@
-import { Link } from 'react-router-dom';
-import { NavbarContainer, NavList, NavItem, NavLink } from './NavbarStyles';
+import {
+  NavbarContainer,
+  NavList,
+  NavbarItem,
+  NavbarLink,
+} from './NavbarStyles';
+
 const Navbar = () => {
   return (
     <NavbarContainer>
       <NavList>
-        <NavItem>
-          <NavLink to="/">Home</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink to="/movies">Movies</NavLink>
-        </NavItem>
+        <NavbarItem>
+          <NavbarLink exact to="/">
+            Home
+          </NavbarLink>
+        </NavbarItem>
+        <NavbarItem>
+          <NavbarLink to="/movies">Movies</NavbarLink>
+        </NavbarItem>
       </NavList>
     </NavbarContainer>
   );
