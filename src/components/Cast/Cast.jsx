@@ -16,6 +16,8 @@ const Cast = () => {
   const [currentMovie] = useState(movieId);
   const [castList, setCastList] = useState([]);
 
+  const placeholderImage = 'https://placehold.co/165x250';
+
   useEffect(() => {
     const options = {
       headers: {
@@ -41,10 +43,15 @@ const Cast = () => {
       <CastContainer>
         {castList.map(castListItem => (
           <CastItem key={castListItem.id}>
-            {castListItem.profile_path && (
+            {castListItem.profile_path ? (
               <CastImage
                 src={`https://image.tmdb.org/t/p/w185${castListItem.profile_path}`}
                 alt={castListItem.name}
+              />
+            ) : (
+              <CastImage
+                src={placeholderImage}
+                alt={`Placeholder for ${castListItem.name}`}
               />
             )}
 
