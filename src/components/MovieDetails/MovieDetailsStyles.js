@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const MovieDetailsContainer = styled.div`
   padding: 20px;
@@ -51,11 +50,15 @@ export const OverviewTitle = styled.h3`
 `;
 
 export const UserScore = styled.p`
-  font-size: 16px;
+  font-size: 2rem;
   font-weight: bold;
   margin-bottom: 16px;
 `;
-
+export const TabTitle = styled.h2`
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 30px;
+`;
 export const TabList = styled.ul`
   list-style: none;
   padding: 0;
@@ -82,4 +85,24 @@ export const TabButton = styled.button`
   }
 `;
 
-export const BackButton = styled(Link)``;
+export const BackButton = styled.button`
+  background-color: #a855f7;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  margin-left: 100px;
+  margin-top: 150px;
+
+  &:hover {
+    background-color: #9333ea;
+  }
+`;

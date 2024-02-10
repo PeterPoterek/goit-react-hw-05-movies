@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -15,6 +15,7 @@ import {
   OverviewContainer,
   OverviewTitle,
   UserScore,
+  TabTitle,
   TabList,
   TabItem,
   TabButton,
@@ -25,7 +26,9 @@ const MovieDetails = () => {
   const { movieId } = useParams();
 
   const [movieDetails, setMovieDetails] = useState(null);
-  const [selectedTab, setTab] = useState('');
+  const [selectedTab, setSelectedTab] = useState('');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -61,14 +64,19 @@ const MovieDetails = () => {
     return Math.round(userScorePercentage);
   };
   const handleTabClick = tab => {
-    setTab(tab);
+    setSelectedTab(tab);
     const newUrl = `/goit-react-hw-05-movies/movies/${movieId}/${tab}`;
     window.history.pushState({ path: newUrl }, '', newUrl);
   };
 
+  const handleBackButtonClick = () => {
+    navigate(-1);
+    setSelectedTab('');
+  };
+
   return (
     <MovieDetailsContainer>
-      <BackButton>Back</BackButton>
+      <BackButton onClick={handleBackButtonClick}>Back</BackButton>
       <MovieTitle>{movieDetails.title}</MovieTitle>
       <MoviePoster
         src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
@@ -88,6 +96,7 @@ const MovieDetails = () => {
         User Score: {calculateUserScorePercentage(movieDetails)}%
       </UserScore>
 
+      <TabTitle>Additional Information</TabTitle>
       <TabList>
         <TabItem>
           <TabButton onClick={() => handleTabClick('cast')}>Cast</TabButton>
