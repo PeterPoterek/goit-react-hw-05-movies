@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { TrendingListContext } from 'components/App';
-import { CurrentMovieContext } from 'components/App';
 import {
   HomeContainer,
   Title,
