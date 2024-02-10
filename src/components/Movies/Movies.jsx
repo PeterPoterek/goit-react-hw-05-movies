@@ -1,6 +1,16 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+
+import {
+  MoviesContainer,
+  SearchInput,
+  SearchButton,
+  MoviesList,
+  MovieItem,
+  MovieLink,
+} from './MoviesStyles';
+
 const Movies = () => {
   const [newMovieSearch, setNewMovieSearch] = useState('');
   const [movies, setMovies] = useState([]);
@@ -34,22 +44,24 @@ const Movies = () => {
   };
 
   return (
-    <div>
-      <input
-        onChange={e => setNewMovieSearch(e.target.value)}
-        type="text"
-        value={newMovieSearch}
-      />
-      <button onClick={handleMovieSearch}>Search</button>
+    <>
+      <MoviesContainer>
+        <SearchInput
+          onChange={e => setNewMovieSearch(e.target.value)}
+          type="text"
+          value={newMovieSearch}
+        />
+        <SearchButton onClick={handleMovieSearch}>Search</SearchButton>
 
-      <ul>
-        {movies.map(movie => (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+        <MoviesList>
+          {movies.map(movie => (
+            <MovieItem key={movie.id}>
+              <MovieLink to={`/movies/${movie.id}`}>{movie.title}</MovieLink>
+            </MovieItem>
+          ))}
+        </MoviesList>
+      </MoviesContainer>
+    </>
   );
 };
 
