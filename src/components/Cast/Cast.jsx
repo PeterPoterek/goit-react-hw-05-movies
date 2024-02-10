@@ -16,7 +16,7 @@ const Cast = () => {
   const [currentMovie] = useState(movieId);
   const [castList, setCastList] = useState([]);
 
-  const placeholderImage = 'https://placehold.co/165x250';
+  const placeholderImage = 'https://placehold.co/165x250?text=Image\n Missing';
 
   useEffect(() => {
     const options = {
