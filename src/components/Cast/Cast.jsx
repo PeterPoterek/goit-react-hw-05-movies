@@ -2,6 +2,14 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import {
+  CastContainer,
+  CastItem,
+  CastImage,
+  CastName,
+  CharacterInfo,
+} from './CastStyles';
+
 const Cast = () => {
   const { movieId } = useParams();
 
@@ -30,19 +38,21 @@ const Cast = () => {
 
   return (
     <>
-      {castList.map(castListItem => (
-        <div key={castListItem.id}>
-          {castListItem.profile_path && (
-            <img
-              src={`https://image.tmdb.org/t/p/w185${castListItem.profile_path}`}
-              alt={castListItem.name}
-            />
-          )}
+      <CastContainer>
+        {castList.map(castListItem => (
+          <CastItem key={castListItem.id}>
+            {castListItem.profile_path && (
+              <CastImage
+                src={`https://image.tmdb.org/t/p/w185${castListItem.profile_path}`}
+                alt={castListItem.name}
+              />
+            )}
 
-          <p>{castListItem.name}</p>
-          <p>Character: {castListItem.character}</p>
-        </div>
-      ))}
+            <CastName>{castListItem.name}</CastName>
+            <CharacterInfo>Character: {castListItem.character}</CharacterInfo>
+          </CastItem>
+        ))}
+      </CastContainer>
     </>
   );
 };
