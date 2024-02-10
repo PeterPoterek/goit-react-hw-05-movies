@@ -2,6 +2,12 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import {
+  ReviewsContainer,
+  ReviewItem,
+  AuthorName,
+  ReviewContent,
+} from './ReviewsStyles';
 const Reviews = () => {
   const { movieId } = useParams();
   const [reviewsList, setReviewsList] = useState([]);
@@ -36,14 +42,16 @@ const Reviews = () => {
 
   return (
     <>
-      <h2>Reviews</h2>
-      {noReviewsMessage && <p>{noReviewsMessage}</p>}
-      {reviewsList.map(reviewListItem => (
-        <div key={reviewListItem.id}>
-          <p>Author: {reviewListItem.author}</p>
-          <p>{reviewListItem.content}</p>
-        </div>
-      ))}
+      <ReviewsContainer>
+        <h2>Reviews</h2>
+        {noReviewsMessage && <p>{noReviewsMessage}</p>}
+        {reviewsList.map(reviewListItem => (
+          <ReviewItem key={reviewListItem.id}>
+            <AuthorName>Author: {reviewListItem.author}</AuthorName>
+            <ReviewContent>{reviewListItem.content}</ReviewContent>
+          </ReviewItem>
+        ))}
+      </ReviewsContainer>
     </>
   );
 };

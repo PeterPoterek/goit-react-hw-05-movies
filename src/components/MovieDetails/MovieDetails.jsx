@@ -18,6 +18,7 @@ import {
   TabList,
   TabItem,
   TabButton,
+  BackButton,
 } from './MovieDetailsStyles';
 
 const MovieDetails = () => {
@@ -67,6 +68,7 @@ const MovieDetails = () => {
 
   return (
     <MovieDetailsContainer>
+      <BackButton>Back</BackButton>
       <MovieTitle>{movieDetails.title}</MovieTitle>
       <MoviePoster
         src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}

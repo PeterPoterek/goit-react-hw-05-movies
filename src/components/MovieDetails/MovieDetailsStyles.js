@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const MovieDetailsContainer = styled.div`
   padding: 20px;
@@ -59,19 +60,19 @@ export const TabList = styled.ul`
   list-style: none;
   padding: 0;
   display: flex;
-  margin-bottom: 16px;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 100px;
 `;
 
-export const TabItem = styled.li`
-  margin-right: 20px;
-`;
+export const TabItem = styled.li``;
 
 export const TabButton = styled.button`
   background-color: #a855f7;
   color: white;
   border: none;
   padding: 10px 16px;
-  font-size: 16px;
+  font-size: 1.5rem;
   cursor: pointer;
   border-radius: 20px;
   transition: background-color 0.3s ease;
@@ -80,3 +81,5 @@ export const TabButton = styled.button`
     background-color: #9333ea;
   }
 `;
+
+export const BackButton = styled(Link)``;
